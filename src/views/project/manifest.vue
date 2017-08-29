@@ -14,39 +14,64 @@
                 <div id="chartColumn" style="width:100%; height:400px;"></div>
             </el-col>
             <el-col :span="24">
-                <a href="http://echarts.baidu.com/examples.html" target="_blank" style="float: right;">more>></a>
-            </el-col>
+            <a href="http://echarts.baidu.com/examples.html" target="_blank" style="float: right;">more>></a>
+        </el-col>
         </el-row>
     </section>
 </template>
 
 <script>
     import echarts from 'echarts'
+    import axios from 'axios'
+    import ElButton from "../../../node_modules/element-ui/packages/button/src/button.vue";
+//    import { addU } from '../../api/api';
+    import * as api from './../../api/api';
 
     export default {
+        components: { ElButton },
         data() {
             return {
                 chartColumn: null,
                 chartBar: null,
                 chartLine: null,
-                chartPie: null
+                chartPie: null,
+                list:null,
+
             }
         },
-
+       created(){
+         this.getList();
+       },
         methods: {
+      getList(){
+                  api.addU().then( (res)=> {
+                      this.list = res.data;
+                      console.log('1',this.list);
+                      this.drawCharts();
+                  })
+                  .catch( (error)=> {
+                      console.log(error);
+                  })
+          },
+            head(){
+          console.log('dd',this.list);
+            },
+
             drawColumnChart() {
                 this.chartColumn = echarts.init(document.getElementById('chartColumn'));
                 this.chartColumn.setOption({
-                  title: { text: 'Column Chart' },
-                  tooltip: {},
-                  xAxis: {
-                      data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-                  },
-                  yAxis: {},
-                  series: [{
-                      name: '销量',
-                      type: 'bar',
-                      data: [5, 20, 36, 10, 10, 20]
+                    title: { text: 'Column Chart' },
+                    tooltip: {},
+                    xAxis: {
+//                        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子","moii"]
+                        data: this.list.dateList
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '销量',
+                        type: 'bar',
+//                        data: [5, 20, 36, 10, 10, 20,77]
+                        data:this.list.insertList
                     }]
                 });
             },
@@ -191,12 +216,13 @@
             },
         },
 
-        mounted: function () {
-            this.drawCharts()
-        },
-        updated: function () {
-            this.drawCharts()
-        }
+//        mounted () {
+//            console.log('ddd',this.list);
+//            this.drawCharts()
+//        },
+//        updated() {
+//            this.drawCharts()
+//        }
     }
 </script>
 
@@ -214,3 +240,34 @@
         padding: 30px 20px;
     }
 </style>
+
+<!--<template>-->
+    <!--<el-button @click="handlers">nihao</el-button>-->
+    <!--&lt;!&ndash;<div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<el-input>{{list[0]}}</el-input>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</template>-->
+<!--<script>-->
+    <!--import axios from 'axios'-->
+    <!--import ElInput from "../../../node_modules/element-ui/packages/input/src/input.vue";-->
+    <!--export default {-->
+        <!--components: { ElInput },-->
+        <!--data() {-->
+            <!--return {-->
+                <!--list:[],-->
+            <!--}-->
+        <!--},-->
+        methods:{
+            <!--handlers: function () {-->
+                <!--axios.get('http://182.61.13.156/section/?section=all')-->
+                    <!--.then( (res)=> {-->
+                        <!--this.list = res.data.dateList;-->
+                        <!--console.log(this.list);-->
+                    <!--})-->
+                    <!--.catch( (error)=> {-->
+                        <!--console.log(error);-->
+                    <!--})-->
+            <!--},-->
+        }
+    <!--}-->
+<!--</script>-->

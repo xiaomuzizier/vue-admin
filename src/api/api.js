@@ -15,3 +15,4 @@ export const batchRemoveUser = params => { return axios.get(`${base}/user/batchr
 export const editUser = params => { return axios.get(`${base}/user/edit`, { params: params }); };
 
 export const addUser = params => { return axios.get(`${base}/user/add`, { params: params }); };
+export const addU = params => { return axios.get(`http://182.61.13.156/section/`, { params: params }); };

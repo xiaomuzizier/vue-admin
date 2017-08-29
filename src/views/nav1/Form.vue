@@ -40,15 +40,19 @@
 		</el-form-item>
 		<el-form-item>
 			<el-button type="primary">立即创建</el-button>
-			<el-button @click.native.prevent>取消</el-button>
+			<el-button @click.native.prevent="handlers">取消</el-button>
 		</el-form-item>
 	</el-form>
 </template>
 
 <script>
+	import axios from 'axios'
+    import ElButton from "../../../node_modules/element-ui/packages/button/src/button.vue";
 	export default {
-		data() {
+        components: { ElButton },
+        data() {
 			return {
+			    list:null,
 				form: {
 					name: '',
 					region: '',
@@ -62,6 +66,16 @@
 			}
 		},
 		methods: {
+		    handlers(){
+                axios.get('http://182.61.13.156/section/?section=all')
+                    .then(function (res) {
+                        this.list=res.data.dataList;
+                        console.log(res);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+			},
 			onSubmit() {
 				console.log('submit!');
 			}
