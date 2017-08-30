@@ -9,10 +9,10 @@ import Page4 from './views/nav2/Page4.vue'
 import Page5 from './views/nav2/Page5.vue'
 import Page6 from './views/nav3/Page6.vue'
 import All from './views/main/All.vue'
-import manifest from './views/project/manifest.vue'
+import manifest from './views/project/project.vue'
 import echarts from './views/charts/echarts.vue'
 
-let routes = [
+ let routes = [
     {
         path: '/login',
         component: Login,
@@ -28,7 +28,7 @@ let routes = [
     {
         path: '/',
         component: Home,
-        name: '项',
+        name: '项目',
         iconCls: 'el-icon-message',//图标样式class
         children: [
             { path: '/all', component: All, name: 'All',hidden:true},
@@ -50,16 +50,16 @@ let routes = [
     //         { path: '/user', component: user, name: '列表' },
     //     ]
     // },
-    // {
-    //     path: '/',
-    //     component: Home,
-    //     name: '用户',
-    //     iconCls: 'fa fa-id-card-o',
-    //     children: [
-    //         { path: '/page4', component: Page4, name: '页面4' },
-    //         { path: '/page5', component: Page5, name: '页面5' }
-    //     ]
-    // },
+    {
+        path: '/',
+        component: Home,
+        name: '用户',
+        iconCls: 'fa fa-id-card-o',
+        children: [
+            { path: '/page4', component: Page4, name: '页面4' },
+            { path: '/page5', component: Page5, name: '页面5' }
+        ]
+    },
     // {
     //     path: '/',
     //     component: Home,

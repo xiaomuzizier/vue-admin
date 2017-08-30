@@ -47,10 +47,10 @@
         },
         methods: {
             getList(){
-              let  para={
-                    section:this.path.slice(1),
+                let  para={
+                    project:this.path.slice(1),
                 };
-                api.addU(para).then( (res)=> {
+                api.addproject(para).then( (res)=> {
                     this.list = res.data;
                     console.log('1',this.list);
                     this.drawCharts();
@@ -60,17 +60,17 @@
                     })
             },
             drawPieChart() {
-                var projectLength=this.list.projectName.length;
-                var name=this.list.projectName;
-                var value=this.list.projectNum;
-                console.log('a',projectLength);
-                 function genData(){
+                var branchLength=this.list.branchName.length;
+                var name=this.list.branchName;
+                var value=this.list.branchNum;
+                console.log('a',branchLength);
+                function genData(){
                     console.log('aaa');
                     var legendData = [];
                     var seriesData = [];
-                    for (var i = 0; i < projectLength; i++) {
-                     let   name1 = name[i];
-                     let   value1=value[i];
+                    for (var i = 0; i < branchLength; i++) {
+                        let   name1 = name[i];
+                        let   value1=value[i];
                         legendData.push(name1);
                         seriesData.push({
                             name: name1,
@@ -87,7 +87,7 @@
                 this.chartPie = echarts.init(document.getElementById('chartPie'));
                 this.chartPie.setOption({
                     title : {
-                        text: '项目 占比图',
+                        text: 'branch 占比图',
                         x:'center'
                     },
                     tooltip: {
@@ -101,7 +101,7 @@
                     },
                     series: [
                         {
-                            name:'项目project.vue',
+                            name:'branch',
                             type:'pie',
                             radius: ['50%', '70%'],
                             avoidLabelOverlap: false,
@@ -271,7 +271,7 @@
                         {
                             name: '代码修改量',
                             type: 'bar',
-                            barWidth: '30%',
+                            barWidth: '10px',
                             data: this.list.ownerNum
                         }
                     ]
@@ -315,7 +315,7 @@
                         {
                             name: '代码修改量',
                             type: 'bar',
-                            barWidth: '30%',
+                            barWidth: '5px',
                             data: this.list.companyNum
                         }
                     ]
@@ -355,34 +355,3 @@
         padding: 30px 20px;
     }
 </style>
-
-<!--<template>-->
-<!--<el-button @click="handlers">nihao</el-button>-->
-<!--&lt;!&ndash;<div>&ndash;&gt;-->
-<!--&lt;!&ndash;<el-input>{{list[0]}}</el-input>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--</template>-->
-<!--<script>-->
-<!--import axios from 'axios'-->
-<!--import ElInput from "../../../node_modules/element-ui/packages/input/src/input.vue";-->
-<!--export default {-->
-<!--components: { ElInput },-->
-<!--data() {-->
-<!--return {-->
-<!--list:[],-->
-<!--}-->
-<!--},-->
-methods:{
-<!--handlers: function () {-->
-<!--axios.get('http://182.61.13.156/section/?section=all')-->
-<!--.then( (res)=> {-->
-<!--this.list = res.data.dateList;-->
-<!--console.log(this.list);-->
-<!--})-->
-<!--.catch( (error)=> {-->
-<!--console.log(error);-->
-<!--})-->
-<!--},-->
-}
-<!--}-->
-<!--</script>-->

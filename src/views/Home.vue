@@ -281,6 +281,7 @@
 				.breadcrumb-container {
 					//margin-bottom: 15px;
 					.title {
+						font-size:30px;
 						width: 200px;
 						float: left;
 						color: #475669;

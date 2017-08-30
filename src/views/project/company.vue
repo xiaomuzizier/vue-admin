@@ -10,9 +10,6 @@
             <el-col :span="24">
                 <div id="chartBar" style="width:100%; height:400px;"></div>
             </el-col>
-            <el-col :span="24">
-                <div id="chartBarCompany" style="width:100%; height:400px;"></div>
-            </el-col>
         </el-row>
     </section>
 </template>
@@ -47,10 +44,10 @@
         },
         methods: {
             getList(){
-              let  para={
-                    section:this.path.slice(1),
+                let  para={
+                    company:this.path.slice(1),
                 };
-                api.addU(para).then( (res)=> {
+                api.addcompany(para).then( (res)=> {
                     this.list = res.data;
                     console.log('1',this.list);
                     this.drawCharts();
@@ -64,13 +61,13 @@
                 var name=this.list.projectName;
                 var value=this.list.projectNum;
                 console.log('a',projectLength);
-                 function genData(){
+                function genData(){
                     console.log('aaa');
                     var legendData = [];
                     var seriesData = [];
                     for (var i = 0; i < projectLength; i++) {
-                     let   name1 = name[i];
-                     let   value1=value[i];
+                        let   name1 = name[i];
+                        let   value1=value[i];
                         legendData.push(name1);
                         seriesData.push({
                             name: name1,
@@ -101,7 +98,7 @@
                     },
                     series: [
                         {
-                            name:'项目project.vue',
+                            name:'branch',
                             type:'pie',
                             radius: ['50%', '70%'],
                             avoidLabelOverlap: false,
@@ -271,52 +268,8 @@
                         {
                             name: '代码修改量',
                             type: 'bar',
-                            barWidth: '30%',
+                            barWidth: '10px',
                             data: this.list.ownerNum
-                        }
-                    ]
-                })
-            },
-            drawBarCompanyChart() {
-                this.chartBarCompany = echarts.init(document.getElementById('chartBarCompany'));
-                this.chartBarCompany.setOption({
-                    color: ['#3398DB'],
-                    title: {
-                        text: '公司修改量 示意图',
-                        x: 'center'
-                    },
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: [
-                        {
-                            type: 'category',
-                            data: this.list.companyName,
-                            axisTick: {
-                                alignWithLabel: true
-                            }
-                        }
-                    ],
-                    yAxis: [
-                        {
-                            type: 'value'
-                        }
-                    ],
-                    series: [
-                        {
-                            name: '代码修改量',
-                            type: 'bar',
-                            barWidth: '30%',
-                            data: this.list.companyNum
                         }
                     ]
                 })
@@ -326,8 +279,6 @@
                 this.drawPieChart()
                 this.drawLineChart()
                 this.drawBarChart()
-                this. drawBarCompanyChart()
-
             },
         },
 
@@ -355,34 +306,3 @@
         padding: 30px 20px;
     }
 </style>
-
-<!--<template>-->
-<!--<el-button @click="handlers">nihao</el-button>-->
-<!--&lt;!&ndash;<div>&ndash;&gt;-->
-<!--&lt;!&ndash;<el-input>{{list[0]}}</el-input>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--</template>-->
-<!--<script>-->
-<!--import axios from 'axios'-->
-<!--import ElInput from "../../../node_modules/element-ui/packages/input/src/input.vue";-->
-<!--export default {-->
-<!--components: { ElInput },-->
-<!--data() {-->
-<!--return {-->
-<!--list:[],-->
-<!--}-->
-<!--},-->
-methods:{
-<!--handlers: function () {-->
-<!--axios.get('http://182.61.13.156/section/?section=all')-->
-<!--.then( (res)=> {-->
-<!--this.list = res.data.dateList;-->
-<!--console.log(this.list);-->
-<!--})-->
-<!--.catch( (error)=> {-->
-<!--console.log(error);-->
-<!--})-->
-<!--},-->
-}
-<!--}-->
-<!--</script>-->
