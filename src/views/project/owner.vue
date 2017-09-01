@@ -43,10 +43,9 @@
         },
         methods: {
             getList(){
-                var owner1=this.path.slice(1);
-                var owner2=owner1.replace(/\s/,'%20');
+               this.path.slice(1)
                 let  para={
-                    owner:owner2,
+                    owner:this.path.slice(1),
                 };
                 api.addowner(para).then( (res)=> {
                     this.list = res.data;

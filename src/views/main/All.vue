@@ -46,8 +46,26 @@
             this.getList();
         },
         methods: {
+//            genData() {
+//                console.log('aaa');
+//        var legendData = [];
+//        var seriesData = [];
+//        var projectLength=this.list.projectName.length;
+//                for (var i = 0; i < projectLength-1; i++) {
+//                    name = this.list.projectName[i];
+//                    legendData.push(name);
+//                    seriesData.push({
+//                        name: name,
+//                        value: this.list.projectNum[i]
+//                    });
+//                }
+//        return {
+//            legendData: legendData,
+//            seriesData: seriesData
+//        };
+//    },
             getList(){
-              let  para={
+                let  para={
                     section:this.path.slice(1),
                 };
                 api.addU(para).then( (res)=> {
@@ -64,13 +82,13 @@
                 var name=this.list.projectName;
                 var value=this.list.projectNum;
                 console.log('a',projectLength);
-                 function genData(){
+                function genData(){
                     console.log('aaa');
                     var legendData = [];
                     var seriesData = [];
-                    for (var i = 0; i < projectLength; i++) {
-                     let   name1 = name[i];
-                     let   value1=value[i];
+                    for (var i = 0; i < projectLength-1; i++) {
+                        let   name1 = name[i];
+                        let   value1=value[i];
                         legendData.push(name1);
                         seriesData.push({
                             name: name1,
@@ -95,13 +113,14 @@
                         formatter: "{a} <br/>{b}: {c} ({d}%)"
                     },
                     legend: {
+                        type: 'scroll',
                         orient: 'vertical',
                         x: 'left',
                         data:dat.legendData
                     },
                     series: [
                         {
-                            name:'项目project.vue',
+                            name:'项目：修改条数（占比）',
                             type:'pie',
                             radius: ['50%', '70%'],
                             avoidLabelOverlap: false,
@@ -355,34 +374,3 @@
         padding: 30px 20px;
     }
 </style>
-
-<!--<template>-->
-<!--<el-button @click="handlers">nihao</el-button>-->
-<!--&lt;!&ndash;<div>&ndash;&gt;-->
-<!--&lt;!&ndash;<el-input>{{list[0]}}</el-input>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--</template>-->
-<!--<script>-->
-<!--import axios from 'axios'-->
-<!--import ElInput from "../../../node_modules/element-ui/packages/input/src/input.vue";-->
-<!--export default {-->
-<!--components: { ElInput },-->
-<!--data() {-->
-<!--return {-->
-<!--list:[],-->
-<!--}-->
-<!--},-->
-methods:{
-<!--handlers: function () {-->
-<!--axios.get('http://182.61.13.156/section/?section=all')-->
-<!--.then( (res)=> {-->
-<!--this.list = res.data.dateList;-->
-<!--console.log(this.list);-->
-<!--})-->
-<!--.catch( (error)=> {-->
-<!--console.log(error);-->
-<!--})-->
-<!--},-->
-}
-<!--}-->
-<!--</script>-->

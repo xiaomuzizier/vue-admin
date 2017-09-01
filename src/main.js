@@ -20,8 +20,6 @@ import All from './views/main/All.vue'
 import Project from './views/project/project.vue'
 import Owner from './views/project/owner.vue'
 import Company from './views/project/company.vue'
-import manifest from './views/project/project.vue'
-import echarts from './views/charts/echarts.vue'
 import axios from 'axios'
 
 Vue.use(ElementUI)
@@ -42,6 +40,7 @@ axios.get(`http://182.61.13.156/nav/`).then( (res)=> {
     function genData(){
         console.log('aaa');
         var projectData = [{ path: '/all', component: All, name: 'All',hidden:true},
+            { path: '/open', component: All, name: 'open',hidden:true},
             { path: '/abandoned', component: All, name: 'abandoned',hidden:true},
             { path: '/merged', component: All, name: 'merged',hidden:true}];
         var ownerData = [];

@@ -22,9 +22,10 @@
 			<!--</el-col>-->
 			<el-col class="header-inner" :span="14">
 				<el-menu  :default-active="$route.path" router class="el-menu-demo" mode="horizontal">
-					<el-menu-item index=1 @click="toAll">All</el-menu-item>
-					<el-menu-item index=2 @click="toMerged">Merged</el-menu-item>
-					<el-menu-item index=3 @click="toAbandoned">Abandoned</el-menu-item>
+					<el-menu-item index="/all">All</el-menu-item>
+					<el-menu-item index="/open">Open</el-menu-item>
+					<el-menu-item index="/merged">Merged</el-menu-item>
+					<el-menu-item index="/abandoned">Abandoned</el-menu-item>
 				</el-menu>
 			</el-col>
 		</el-col>
@@ -100,15 +101,6 @@
 			}
 		},
 		methods: {
-            toAll(){
-                this.$router.push({path:'/all'});
-			},
-            toMerged(){
-                this.$router.push({path:'/merged'});
-            },
-            toAbandoned(){
-                this.$router.push({path:'/abandoned'});
-            },
 			onSubmit() {
 				console.log('submit!');
 			},
@@ -142,15 +134,6 @@
 				this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-'+i)[0].style.display=status?'block':'none';
 			}
 		},
-		mounted() {
-			var user = sessionStorage.getItem('user');
-			if (user) {
-				user = JSON.parse(user);
-				this.sysUserName = user.name || '';
-				this.sysUserAvatar = user.avatar || '';
-			}
-
-		}
 	}
 
 </script>
@@ -180,22 +163,6 @@
 			line-height: 60px;
 			background: $color-primary;
 			color:#fff;
-			/*.userinfo {*/
-				/*text-align: right;*/
-				/*padding-right: 35px;*/
-				/*float: right;*/
-				/*.userinfo-inner {*/
-					/*cursor: pointer;*/
-					/*color:#fff;*/
-					/*img {*/
-						/*width: 40px;*/
-						/*height: 40px;*/
-						/*border-radius: 20px;*/
-						/*margin: 10px 0px 10px 10px;*/
-						/*float: right;*/
-					/*}*/
-				/*}*/
-			/*}*/
 			.logo {
 				//width:230px;
 				height:60px;
@@ -215,7 +182,7 @@
 				}
 			}
 			.logo-width{
-				width:230px;
+				width:300px;
 			}
 			.logo-collapse-width{
 				width:60px
@@ -237,7 +204,7 @@
 			overflow: hidden;
 			aside {
 				flex:0 0 230px;
-				width: 230px;
+				width: 300px;
 				// position: absolute;
 				// top: 0px;
 				// bottom: 0px;
@@ -265,8 +232,9 @@
 				width: 60px;
 			}
 			.menu-expanded{
-				flex:0 0 230px;
-				width: 230px;
+				flex:0 0 300px;
+				width: 400px;
+				overflow-y:scroll;
 			}
 			.content-container {
 				// background: #f1f2f7;
@@ -281,7 +249,6 @@
 				.breadcrumb-container {
 					//margin-bottom: 15px;
 					.title {
-						font-size:30px;
 						width: 200px;
 						float: left;
 						color: #475669;
